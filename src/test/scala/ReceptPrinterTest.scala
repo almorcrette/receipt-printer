@@ -25,6 +25,18 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers {
     )
   )
 
+  "A Till" should {
+    "show the menu" which {
+      "constains cafe menu items and prices" in {
+        val till = new Till(
+          coffeeConnectionCafe
+        )
+        till.cafePrices shouldEqual coffeeConnectionCafe.prices
+      }
+
+    }
+  }
+
   "A ReceiptPrinter" should {
     "format a receipt" which {
       "contains the name of the cafe" in {

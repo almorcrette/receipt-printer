@@ -5,6 +5,12 @@ class CafeDetails (
                   val prices: Map[String, Double]
                   )
 
+class Till(val cafe: CafeDetails) {
+  def cafePrices: Map[String, Double] = {
+    cafe.prices
+  }
+}
+
 class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map()) {
 
   /**
