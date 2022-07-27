@@ -9,11 +9,13 @@ class Till(val cafe: CafeDetails) {
 
   private var _order: Map[String, Int] = Map()
 
+  def order = _order
+
   def cafePrices: Map[String, Double] = {
     cafe.prices
   }
-  def order_=(item: String): Map[String, Int] = {
-    _order + (item -> 1)
+  def order_=(item: String): Unit = {
+    _order += (item -> 1)
   }
 }
 
