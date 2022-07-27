@@ -1,7 +1,9 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import org.scalamock.scalatest.MockFactory
+import org.scalamock.proxy.ProxyMockFactory
 
-class ReceiptPrinterSpec extends AnyWordSpec with Matchers {
+class ReceiptPrinterSpec extends AnyWordSpec with Matchers with MockFactory with ProxyMockFactory {
   val coffeeConnectionCafe = new CafeDetails(
     "The Coffee Connection",
     "123 Lakeside Way",
@@ -95,7 +97,18 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers {
         }
         thrown.getMessage should equal ("Not in menu")
       }
+    }
+    "checkout an order" which {
+      "finalise the and print the statement by calling on the receipt printer" in {
+//        val receiptPrinterMock = mock[ReceiptPrinter]
+        val till = new Till(coffeeConnectionCafe)
+//        (receiptPrinterMock.receipt _).expects()
+        till.order_=("Cappuccino")
+        till.order_=("Muffin Of The Day")
+        till.order_=("Cappuccino")
+        till.checkout should include ("The Coffee Connection")
 
+      }
     }
   }
 
