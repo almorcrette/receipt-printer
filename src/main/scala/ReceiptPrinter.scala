@@ -15,10 +15,11 @@ class Till(val cafe: CafeDetails) {
     cafe.prices
   }
   def order_=(item: String): Unit = {
-    if (order.contains(item)) {
-      _order += (item -> 2)
-    } else {
+    val numberThisItemInBasket = order get item
+    if (numberThisItemInBasket == None) {
       _order += (item -> 1)
+    } else {
+      _order += (item -> (order(item) + 1))
     }
   }
 }

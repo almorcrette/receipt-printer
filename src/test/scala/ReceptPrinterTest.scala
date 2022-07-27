@@ -63,6 +63,17 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers {
           "Cappuccino" -> 2
         )
       }
+      "add three of the same item to their empty order if in menu" in {
+        val till = new Till(
+          coffeeConnectionCafe
+        )
+        till.order_=("Cappuccino")
+        till.order_=("Cappuccino")
+        till.order_=("Cappuccino")
+        till.order shouldEqual Map(
+          "Cappuccino" -> 3
+        )
+      }
 
     }
   }
