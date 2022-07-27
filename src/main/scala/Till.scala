@@ -22,7 +22,7 @@ class Till(val cafe: CafeDetails) {
     }
   }
 
-  def checkout: String = {
+  def checkout: Unit = {
     _receiptPrinter.receipt
   }
 }

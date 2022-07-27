@@ -11,8 +11,24 @@ class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map())
    * - the VAT (20% of total price)
    */
   def receipt: String = {
-    f"""${cafe.shopName}
-    |${cafe.address}
-    |${cafe.phone} """.stripMargin
+    println(cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + orderList)
+    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + orderList
+//    f"""${cafe.shopName}
+//    |${cafe.address}
+//    |${cafe.phone}
+//    |
+//    |$orderList""".stripMargin
+  }
+
+  def orderList: String = {
+    val itemIterator = order.keysIterator
+    val amountIterator = order.valuesIterator
+    var list = ""
+    while (itemIterator.hasNext) {
+      var currentItem = itemIterator.next
+      var currentItemAmount = amountIterator.next
+      list = list + f"\n${currentItemAmount} x $currentItem         ${("%1.2f".format(cafe.prices(currentItem) * currentItemAmount))}"
+    }
+    list
   }
 }
