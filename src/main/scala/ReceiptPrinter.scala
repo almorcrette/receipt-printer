@@ -15,7 +15,11 @@ class Till(val cafe: CafeDetails) {
     cafe.prices
   }
   def order_=(item: String): Unit = {
-    _order += (item -> 1)
+    if (order.contains(item)) {
+      _order += (item -> 2)
+    } else {
+      _order += (item -> 1)
+    }
   }
 }
 
