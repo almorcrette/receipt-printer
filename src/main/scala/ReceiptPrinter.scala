@@ -1,5 +1,4 @@
 class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map()) {
-
   /**
    * This method should return a multiline string
    * representing a ReceiptPrinter receipt that should show
@@ -12,6 +11,8 @@ class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map())
    * - the VAT (20% of total price)
    */
   def receipt: String = {
-    cafe.shopName
+    f"""${cafe.shopName}
+    |${cafe.address}
+    |${cafe.phone} """.stripMargin
   }
 }
