@@ -6,8 +6,14 @@ class CafeDetails (
                   )
 
 class Till(val cafe: CafeDetails) {
+
+  private var _order: Map[String, Int] = Map()
+
   def cafePrices: Map[String, Double] = {
     cafe.prices
+  }
+  def order_=(item: String): Map[String, Int] = {
+    _order + (item -> 1)
   }
 }
 
