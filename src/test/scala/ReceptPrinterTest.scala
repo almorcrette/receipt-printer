@@ -86,6 +86,15 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers {
           "Muffin Of The Day" -> 1
         )
       }
+      "raises an error if their request item is not in the menu" in {
+        val till = new Till(
+          coffeeConnectionCafe
+        )
+        val thrown = the [Exception] thrownBy {
+          till.order_=("Babyccino")
+        }
+        thrown.getMessage should equal ("Not in menu")
+      }
 
     }
   }
