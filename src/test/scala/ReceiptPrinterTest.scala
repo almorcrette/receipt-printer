@@ -1,7 +1,6 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalamock.scalatest.MockFactory
-import org.scalamock.proxy.ProxyMockFactory
 import com.github.nscala_time.time.Imports._
 
 class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
@@ -55,7 +54,6 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
 
       "contains the time and date receipt is printed" in {
         val mockDateTimeFactory = mock[FactoryBase[DateTime]]
-        println(mockDateTimeFactory)
         val mockDateTime = new DateTime(2022, 7,28, 16, 30)
         (mockDateTimeFactory.create _).expects().returning(mockDateTime)
 

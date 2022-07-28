@@ -3,7 +3,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalamock.scalatest.MockFactory
 import org.scalamock.proxy.ProxyMockFactory
 
-class TillSpec extends AnyWordSpec with Matchers with MockFactory with ProxyMockFactory {
+class TillTest extends AnyWordSpec with Matchers with MockFactory {
   val coffeeConnectionCafe = new CafeDetails(
     "The Coffee Connection",
     "123 Lakeside Way",
@@ -100,13 +100,16 @@ class TillSpec extends AnyWordSpec with Matchers with MockFactory with ProxyMock
     }
     "checkout an order" which {
       "finalise the and print the statement by calling on the receipt printer" in {
-        //        val receiptPrinterMock = mock[ReceiptPrinter]
-        val till = new Till(coffeeConnectionCafe)
-        //        (receiptPrinterMock.receipt _).expects()
+        val mockReceiptPrinter = mock[ReceiptPrinter]
+        val till = new Till(
+          coffeeConnectionCafe,
+          mockReceiptPrinter
+        )
+        (receiptPrinterMock.receipt _).expects().returning("a receipt")
         till.order_=("Cappuccino")
         till.order_=("Muffin Of The Day")
         till.order_=("Cappuccino")
-//        till.checkout should include ("The Coffee Connection")
+        till.checkout should equal ("a receipt")
       }
     }
   }
