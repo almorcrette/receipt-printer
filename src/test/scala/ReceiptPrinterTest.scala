@@ -2,8 +2,9 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalamock.scalatest.MockFactory
 import org.scalamock.proxy.ProxyMockFactory
+import com.github.nscala_time.time.Imports._
 
-class ReceiptPrinterSpec extends AnyWordSpec with Matchers with MockFactory with ProxyMockFactory {
+class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
   val coffeeConnectionCafe = new CafeDetails(
     "The Coffee Connection",
     "123 Lakeside Way",
@@ -49,6 +50,19 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers with MockFactory with
           Map("Cafe Latte" -> 1)
         )
         printer.receipt should include ("16503600708")
+      }
+      "contains the time and date receipt is printed" in {
+        val mockDateTimeFactory = mock[FactoryBase[DateTime]]
+        println(mockDateTimeFactory)
+        val mockDateTime = new DateTime(2022, 7,28, 16, 30)
+        (mockDateTimeFactory.create _).expects().returning(mockDateTime)
+
+        val printer = new ReceiptPrinter(
+          coffeeConnectionCafe,
+          Map("Cafe Latte" -> 1),
+          mockDateTimeFactory
+        )
+        printer.receipt should include ("16:30 28-07-2022")
       }
       "contains the item in the order with one item, with the price" in {
         val printer = new ReceiptPrinter(
