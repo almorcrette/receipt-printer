@@ -3,7 +3,7 @@ import com.github.nscala_time.time.Imports._
 class ReceiptPrinter(
                       val cafe: CafeDetails,
                       var order: Map[String, Int] = Map(),
-                      val dateTimeHelper: DateTimeHelper = new DateTimeHelper
+                      val dateTimeFactory: FactoryBase[DateTime] = DateTimeFactory
                     ) {
   /**
    * This method should return a multiline string
@@ -34,9 +34,8 @@ class ReceiptPrinter(
   }
 
   def _receiptTime: String = {
-    "something"
-//    val dateTimeStamp = DateTime.now()
-//    val formatter = DateTimeFormat.forPattern("H:m dd-MM-yyy")
-//    dateTimeStamp.toString(formatter)
+    val dateTimeStamp = dateTimeFactory.create
+    val formatter = DateTimeFormat.forPattern("H:m dd-MM-yyy")
+    dateTimeStamp.toString(formatter)
   }
 }
