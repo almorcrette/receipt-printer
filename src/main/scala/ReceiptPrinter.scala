@@ -1,6 +1,10 @@
 import com.github.nscala_time.time.Imports._
 
-class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map()) {
+class ReceiptPrinter(
+                      val cafe: CafeDetails,
+                      var order: Map[String, Int] = Map(),
+                      val dateTimeHelper: DateTimeHelper = new DateTimeHelper
+                    ) {
   /**
    * This method should return a multiline string
    * representing a ReceiptPrinter receipt that should show
