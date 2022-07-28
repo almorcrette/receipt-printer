@@ -1,3 +1,5 @@
+import com.github.nscala_time.time.Imports._
+
 class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map()) {
   /**
    * This method should return a multiline string
@@ -11,16 +13,11 @@ class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map())
    * - the VAT (20% of total price)
    */
   def receipt: String = {
-    println(cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + orderList)
-    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + orderList
-//    f"""${cafe.shopName}
-//    |${cafe.address}
-//    |${cafe.phone}
-//    |
-//    |$orderList""".stripMargin
+//    println(    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + receiptTime + "\n" + orderList)
+    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + _receiptTime + "\n" + _orderList
   }
 
-  def orderList: String = {
+  def _orderList: String = {
     val itemIterator = order.keysIterator
     val amountIterator = order.valuesIterator
     var list = ""
@@ -30,5 +27,12 @@ class ReceiptPrinter(val cafe: CafeDetails, var order: Map[String, Int] = Map())
       list = list + f"\n${currentItemAmount} x $currentItem         ${("%1.2f".format(cafe.prices(currentItem) * currentItemAmount))}"
     }
     list
+  }
+
+  def _receiptTime: String = {
+    "something"
+//    val dateTimeStamp = DateTime.now()
+//    val formatter = DateTimeFormat.forPattern("H:m dd-MM-yyy")
+//    dateTimeStamp.toString(formatter)
   }
 }
