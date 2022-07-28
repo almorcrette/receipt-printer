@@ -1,13 +1,14 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalamock.scalatest.MockFactory
-import org.scalamock.proxy.ProxyMockFactory
+
+import java.time.Instant
+//import org.scalamock.proxy.ProxyMockFactory
 import org.scalatestplus.mockito.MockitoSugar
 import com.github.nscala_time.time.Imports._
 //import org.mockito.mockito_core.MockitoSugar
 
 class ReceiptPrinterSpec extends AnyWordSpec with Matchers with MockitoSugar with MockFactory with ProxyMockFactory {
-  val mockedDateTimeHelper = mock [DateTimeHelper]
   val coffeeConnectionCafe = new CafeDetails(
     "The Coffee Connection",
     "123 Lakeside Way",
@@ -58,14 +59,19 @@ class ReceiptPrinterSpec extends AnyWordSpec with Matchers with MockitoSugar wit
         printer.receipt should include ("16503600708")
       }
       "contains the date and time of the receipt" in {
+        val mockedInstantFactory = mock[FactoryBase[Instant]]
+        val mockInstant = Instant.parse("2022-07-27T14:35:00.00Z")
+
+        (mockedInstantFactory.create _).expects().returning(mockInstant)
+
+        val targetDate = "15:30 28/07/2022"
         val printer = new ReceiptPrinter(
           coffeeConnectionCafe,
           Map("Cafe Latte" -> 1),
-          mockedDateTimeHelper
+          mockInstantFactory
         )
-        when(mockedDateTimeHelper.dateTimeNow) thenReturn ("some date and time")
 
-        printer.receipt should include ("15:30 28/07/2022")
+        printer.receipt should include ("15:34 27/07/2022")
       }
       "contains the item in the order with one item, with the price" in {
         val printer = new ReceiptPrinter(

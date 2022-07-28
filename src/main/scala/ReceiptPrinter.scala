@@ -1,9 +1,12 @@
 import com.github.nscala_time.time.Imports._
 
+import java.time.Instant
+// need to import the
+
 class ReceiptPrinter(
                       val cafe: CafeDetails,
                       var order: Map[String, Int] = Map(),
-                      val dateTimeHelper: DateTimeHelper = new DateTimeHelper
+                      val dateFactory: DateFactory = DateFactory
                     ) {
   /**
    * This method should return a multiline string
@@ -18,7 +21,7 @@ class ReceiptPrinter(
    */
   def receipt: String = {
 //    println(    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + receiptTime + "\n" + orderList)
-    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + _receiptTime + "\n" + _orderList
+    cafe.shopName + "\n" + cafe.address + "\n" + cafe.phone + "\n" + formatInstant(instant) + "\n" + _orderList
   }
 
   def _orderList: String = {
@@ -33,10 +36,8 @@ class ReceiptPrinter(
     list
   }
 
-  def _receiptTime: String = {
-    "something"
-//    val dateTimeStamp = DateTime.now()
-//    val formatter = DateTimeFormat.forPattern("H:m dd-MM-yyy")
-//    dateTimeStamp.toString(formatter)
+  def formatInstant = (instant: Instant): String => {
+    val formatter = DateTimeFormatter.ofPattern("H:m dd-MM-yyy").withZone(ZoneId.system...)
+    formatter.format(instant)
   }
 }
