@@ -49,9 +49,22 @@ class OrderSpec extends AnyWordSpec with Matchers {
           "Cappuccino" -> 1
         )
       }
-//      "manages multiples of a single menu item" in {
-//
-//      }
+      "manages multiples of a single menu item" in {
+        val order = new Order(coffeeConnectionCafe)
+        order.add("Cafe Latte")
+        order.add("Cafe Latte")
+        order.view shouldEqual Map(
+          "Cafe Latte" -> 2
+        )
+      }
+      "throws error if item is not on the menu" in {
+        val order = new Order(coffeeConnectionCafe)
+
+        val thrown = the[Exception] thrownBy {
+          order.add("Babyccino")
+        }
+        thrown.getMessage should equal("Not in menu")
+      }
     }
   }
 }
