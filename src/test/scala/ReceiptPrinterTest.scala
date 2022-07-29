@@ -5,16 +5,16 @@ import com.github.nscala_time.time.Imports._
 
 class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
 
-  val mockOrder = mock[Order]
-  val mockTill = mock[Till]
+  val mockOrder: Order = mock[Order]
+  val mockTill: Till = mock[Till]
 
-  val mockHeader = List("The Coffee Connection", "123 Lakeside Way", "16503600708")
-  val mockCafePrices = Map(
+  val mockHeader: List[String] = List("The Coffee Connection", "123 Lakeside Way", "16503600708")
+  val mockCafePrices: Map[String, Double] = Map(
     "Cafe Latte" -> 4.75,
     "Flat White" -> 4.75,
     "Cappuccino" -> 3.85
   )
-  val mockItems = Map("Cappuccino" -> 1, "Cafe Latte" -> 2)
+  val mockItems: Map[String, Int] = Map("Cappuccino" -> 1, "Cafe Latte" -> 2)
 
   "A ReceiptPrinter" should {
     "prints a formatted receipt" which {

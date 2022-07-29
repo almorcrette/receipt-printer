@@ -14,9 +14,9 @@ class ReceiptPrinter(
     val amountIterator = order.items.valuesIterator
     var list = ""
     while (itemIterator.hasNext) {
-      var currentItem = itemIterator.next
-      var currentItemAmount = amountIterator.next.toInt
-      list = list + f"\n${currentItemAmount} x $currentItem         ${("%1.2f".format(till.cafePrices(currentItem) * currentItemAmount))}"
+      val currentItem = itemIterator.next
+      val currentItemAmount = amountIterator.next
+      list = list + f"\n$currentItemAmount x $currentItem         ${"%1.2f".format(till.cafePrices(currentItem) * currentItemAmount)}"
     }
     list
   }
@@ -32,8 +32,8 @@ class ReceiptPrinter(
     val amountIterator = order.items.valuesIterator
     var total = 0.0
     while (itemIterator.hasNext) {
-      var currentItem = itemIterator.next
-      var currentItemAmount = amountIterator.next.toInt
+      val currentItem = itemIterator.next
+      val currentItemAmount: Int = amountIterator.next
       total += till.cafePrices(currentItem) * currentItemAmount
     }
     total
