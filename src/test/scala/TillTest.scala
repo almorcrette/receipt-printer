@@ -57,19 +57,19 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
       }
 
     }
-//    "checkout an order" which {
-//      "finalise the and print the statement by calling on the receipt printer" in {
-//        val mockReceiptPrinter = mock[ReceiptPrinter]
-//        val till = new Till(
-//          coffeeConnectionCafe,
-////          mockReceiptPrinter
-//        )
-////        (mockReceiptPrinter _).expects().returning("a receipt")
-//        till.order_=("Cappuccino")
-//        till.order_=("Muffin Of The Day")
-//        till.order_=("Cappuccino")
-//        till.checkout should equal ("a receipt")
-//      }
-//    }
+    "checkout an order" which {
+      "finalise the and print the statement by calling on the receipt printer" in {
+        val mockReceiptPrinter = mock[ReceiptPrinter]
+        val mockOrder = mock[Order]
+        val till = new Till(
+          coffeeConnectionCafe,
+          mockOrder,
+          mockReceiptPrinter
+        )
+        (mockReceiptPrinter.print _).expects(mockOrder, till).returning("a receipt")
+
+        till.checkout should equal ("a receipt")
+      }
+    }
   }
 }

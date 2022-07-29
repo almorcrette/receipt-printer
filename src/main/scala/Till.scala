@@ -19,7 +19,7 @@ class Till(
     _order.add(item)
   }
 
-//  def checkout: Unit = {
-//    _receiptPrinter.receipt
-//  }
+  def checkout: String = {
+    _receiptPrinter.print(order, this)
+  }
 }
