@@ -1,4 +1,4 @@
 trait OrderBase {
-  def add(item: String): Map[String, Double]
-  def items: Map[String, Double]
+  def add(item: String): Map[String, Int]
+  def items: Map[String, Int]
 }

@@ -1,8 +1,8 @@
 class Order extends OrderBase {
 
-  private var _items: Map[String, Double] = Map()
+  private var _items: Map[String, Int] = Map()
 
-  def add(item: String): Map[String, Double] = {
+  def add(item: String): Map[String, Int] = {
     val numberThisItemInBasket = _items get item
     if (numberThisItemInBasket.isEmpty) {
       _items += (item -> 1)
@@ -12,6 +12,6 @@ class Order extends OrderBase {
     _items
   }
 
-  def items: Map[String, Double] = _items
+  def items: Map[String, Int] = _items
 
 }
