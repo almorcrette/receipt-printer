@@ -14,7 +14,7 @@ class ReceiptPrinter(
     var list = ""
     while (itemIterator.hasNext) {
       var currentItem = itemIterator.next
-      var currentItemAmount = amountIterator.next
+      var currentItemAmount = amountIterator.next.toInt
       list = list + f"\n${currentItemAmount} x $currentItem         ${("%1.2f".format(till.cafePrices(currentItem) * currentItemAmount))}"
     }
     list

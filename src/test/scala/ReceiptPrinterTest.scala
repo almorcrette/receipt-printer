@@ -113,25 +113,52 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         )
         receiptPrinter.print(mockOrder, mockTill) should include ("16:30 28-07-2022")
       }
-//      "contains the item in the order with one item, with the price" in {
-//        val printer = new ReceiptPrinter(
-//          coffeeConnectionCafe,
-//          Map("Cafe Latte" -> 1)
-//        )
-//        printer.receipt should include (
-//          "1 x Cafe Latte         4.75"
-//        )
-//      }
-//      "contains the items in the order, with the price" in {
-//        val printer = new ReceiptPrinter(
-//          coffeeConnectionCafe,
-//          Map("Cafe Latte" -> 1, "Cappuccino" -> 2)
-//        )
-//        printer.receipt should include (
-//          """1 x Cafe Latte         4.75
-//        |2 x Cappuccino         7.70""".stripMargin
-//        )
-//      }
+      "contains the item in the order with one item, with the price" in {
+        val mockOrder = mock[OrderBase]
+        val mockTill = mock[Till]
+        (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
+        val receiptPrinter = new ReceiptPrinter(
+        )
+
+        receiptPrinter.print(mockOrder, mockTill) should include (
+          "1 x Cafe Latte         4.75"
+        )
+      }
+      "contains the items in the order, with the price" in {
+        val mockOrder = mock[OrderBase]
+        val mockTill = mock[Till]
+        (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
+        val receiptPrinter = new ReceiptPrinter(
+        )
+        receiptPrinter.print(mockOrder, mockTill) should include (
+          """2 x Cappuccino         7.70
+        |1 x Cafe Latte         4.75""".stripMargin
+        )
+      }
     }
   }
 }
