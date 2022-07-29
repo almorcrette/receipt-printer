@@ -1,11 +1,11 @@
 class Till(
             val cafeDetails: CafeDetails,
-            val _order: Order = new Order
+            val _order: OrderBase = Order
           ) {
 
 //  private val _receiptPrinter: ReceiptPrinter = new ReceiptPrinter(cafeDetails, _order)
 
-  def order: Order = _order
+  def order: OrderBase = _order
 
   def cafePrices: Map[String, Double] = {
     cafeDetails.prices

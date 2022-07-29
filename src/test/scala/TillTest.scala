@@ -37,51 +37,6 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
       }
     }
     "allows user to update their order" which {
-      "add a first item to their order if in menu" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.order_=("Muffin Of The Day")
-        till.order.view("Muffin Of The Day") shouldEqual 1
-      }
-      "add two different items to their empty order if in menu" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.order_=("Cappuccino")
-        till.order_=("Muffin Of The Day")
-        till.order.view("Muffin Of The Day") shouldEqual 1
-        till.order.view("Cappuccino") shouldEqual 1
-      }
-      "add two of the same item to their empty order if in menu" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.order_=("Cappuccino")
-        till.order_=("Cappuccino")
-        till.order.view("Cappuccino") shouldEqual 2
-
-      }
-      "add three of the same item to their empty order if in menu" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.order_=("Cappuccino")
-        till.order_=("Cappuccino")
-        till.order_=("Cappuccino")
-        till.order.view("Cappuccino") shouldEqual 3
-
-      }
-      "add multiple items, some multiple times, some once to their empty order all in menu" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.order_=("Cappuccino")
-        till.order_=("Muffin Of The Day")
-        till.order_=("Cappuccino")
-        till.order.view("Muffin Of The Day") shouldEqual 1
-        till.order.view("Cappuccino") shouldEqual 2
-      }
       "raises an error if their request item is not in the menu" in {
         val till = new Till(
           coffeeConnectionCafe
@@ -91,6 +46,16 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
         }
         thrown.getMessage should equal ("Not in menu")
       }
+      "add an item to their order if in menu" in {
+        val mockOrder = mock[OrderBase]
+        (mockOrder.add _).expects()
+        val till = new Till(
+          coffeeConnectionCafe,
+          mockOrder
+        )
+        till.order_=("Muffin Of The Day")
+      }
+
     }
 //    "checkout an order" which {
 //      "finalise the and print the statement by calling on the receipt printer" in {
