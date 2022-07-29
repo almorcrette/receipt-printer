@@ -4,8 +4,6 @@ class Till(
             val _receiptPrinter: PrinterBase = new ReceiptPrinter
           ) {
 
-//  private val _receiptPrinter: ReceiptPrinter = new ReceiptPrinter(cafeDetails, _order)
-
   def header: List[String] = List(cafeDetails.shopName, cafeDetails.address, cafeDetails.phone)
 
   def order: OrderBase = _order
