@@ -103,9 +103,9 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
         val mockReceiptPrinter = mock[ReceiptPrinter]
         val till = new Till(
           coffeeConnectionCafe,
-          mockReceiptPrinter
+//          mockReceiptPrinter
         )
-        (receiptPrinterMock.receipt _).expects().returning("a receipt")
+//        (receiptPrinterMock.receipt _).expects().returning("a receipt")
         till.order_=("Cappuccino")
         till.order_=("Muffin Of The Day")
         till.order_=("Cappuccino")
