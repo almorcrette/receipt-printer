@@ -1,6 +1,6 @@
 class Till(
             val cafeDetails: CafeDetails,
-            val _order: OrderBase = Order
+            val _order: OrderBase = new Order
           ) {
 
 //  private val _receiptPrinter: ReceiptPrinter = new ReceiptPrinter(cafeDetails, _order)

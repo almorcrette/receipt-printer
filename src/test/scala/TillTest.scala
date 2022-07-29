@@ -48,7 +48,7 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
       }
       "add an item to their order if in menu" in {
         val mockOrder = mock[OrderBase]
-        (mockOrder.add _).expects()
+        (mockOrder.add _).expects("Muffin Of The Day")
         val till = new Till(
           coffeeConnectionCafe,
           mockOrder
@@ -64,7 +64,7 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
 //          coffeeConnectionCafe,
 ////          mockReceiptPrinter
 //        )
-////        (receiptPrinterMock.receipt _).expects().returning("a receipt")
+////        (mockReceiptPrinter _).expects().returning("a receipt")
 //        till.order_=("Cappuccino")
 //        till.order_=("Muffin Of The Day")
 //        till.order_=("Cappuccino")

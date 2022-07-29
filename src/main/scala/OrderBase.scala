@@ -1,3 +1,3 @@
 trait OrderBase {
-  def add: Map[String, Double]
+  def add(item: String): Map[String, Double]
 }

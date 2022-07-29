@@ -1,4 +1,4 @@
-class Order {
+class Order extends OrderBase {
 
   private var _items: Map[String, Double] = Map()
 
