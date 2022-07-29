@@ -87,18 +87,32 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         receiptPrinter.print(mockOrder, mockTill) should include ("16503600708")
       }
 
-//      "contains the time and date receipt is printed" in {
-//        val mockDateTimeFactory = mock[FactoryBase[DateTime]]
-//        val mockDateTime = new DateTime(2022, 7,28, 16, 30)
-//        (mockDateTimeFactory.create _).expects().returning(mockDateTime)
-//
-//        val printer = new ReceiptPrinter(
-//          coffeeConnectionCafe,
-//          Map("Cafe Latte" -> 1),
-//          mockDateTimeFactory
-//        )
-//        printer.receipt should include ("16:30 28-07-2022")
-//      }
+      "contains the time and date receipt is printed" in {
+        val mockDateTimeFactory = mock[FactoryBase[DateTime]]
+        val mockDateTime = new DateTime(2022, 7,28, 16, 30)
+        (mockDateTimeFactory.create _).expects().returning(mockDateTime)
+
+        val mockOrder = mock[OrderBase]
+        val mockTill = mock[Till]
+        (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockTill.cafePrices _).expects().returns(Map(
+          "Cafe Latte" -> 4.75,
+          "Flat White" -> 4.75,
+          "Cappuccino" -> 3.85)
+        )
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
+        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
+
+        val receiptPrinter = new ReceiptPrinter(
+          mockDateTimeFactory
+        )
+        receiptPrinter.print(mockOrder, mockTill) should include ("16:30 28-07-2022")
+      }
 //      "contains the item in the order with one item, with the price" in {
 //        val printer = new ReceiptPrinter(
 //          coffeeConnectionCafe,
