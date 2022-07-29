@@ -10,31 +10,12 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-
+          "Cappuccino" -> 3.85
+        ))
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
 
         val receiptPrinter = new ReceiptPrinter
         receiptPrinter.print(mockOrder, mockTill) should include ("The Coffee Connection")
@@ -43,31 +24,12 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-
+          "Cappuccino" -> 3.85
+        ))
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
 
         val receiptPrinter = new ReceiptPrinter
         receiptPrinter.print(mockOrder, mockTill) should include ("123 Lakeside Way")
@@ -76,31 +38,13 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
+          "Cappuccino" -> 3.85
+        ))
 
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
 
         val receiptPrinter = new ReceiptPrinter
         receiptPrinter.print(mockOrder, mockTill) should include ("16503600708")
@@ -114,31 +58,12 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
-
+          "Cappuccino" -> 3.85
+        ))
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 2))
 
         val receiptPrinter = new ReceiptPrinter(
           mockDateTimeFactory
@@ -149,31 +74,12 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
-
+          "Cappuccino" -> 3.85
+        ))
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 1, "Cafe Latte" -> 1))
 
         val receiptPrinter = new ReceiptPrinter(
         )
@@ -186,31 +92,13 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[OrderBase]
         val mockTill = mock[Till]
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
+          "Cappuccino" -> 3.85
+        ))
 
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
 
         val receiptPrinter = new ReceiptPrinter(
         )
@@ -224,33 +112,13 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockTill = mock[Till]
 
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
+          "Cappuccino" -> 3.85
+        ))
 
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-
-
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
 
         val receiptPrinter = new ReceiptPrinter(
         )
@@ -263,33 +131,12 @@ class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
         val mockTill = mock[Till]
 
         (mockTill.header _).expects().returns(List("The Coffee Connection", "123 Lakeside Way", "16503600708"))
-        (mockTill.cafePrices _).expects().returns(Map(
+        (mockTill.cafePrices _).expects().anyNumberOfTimes().returns(Map(
           "Cafe Latte" -> 4.75,
           "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-        (mockTill.cafePrices _).expects().returns(Map(
-          "Cafe Latte" -> 4.75,
-          "Flat White" -> 4.75,
-          "Cappuccino" -> 3.85)
-        )
-
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-        (mockOrder.items _).expects().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
-
-
+          "Cappuccino" -> 3.85
+        ))
+        (mockOrder.items _).expects().anyNumberOfTimes().returns(Map("Cappuccino" -> 2, "Cafe Latte" -> 1))
 
         val receiptPrinter = new ReceiptPrinter(
         )
