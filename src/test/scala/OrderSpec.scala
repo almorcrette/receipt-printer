@@ -30,7 +30,7 @@ class OrderSpec extends AnyWordSpec with Matchers {
         val order = new Order
         order.add("Cafe Latte")
         order.add("Cappuccino")
-        order.view shouldEqual Map(
+        order.items shouldEqual Map(
           "Cafe Latte" -> 1,
           "Cappuccino" -> 1
         )
@@ -39,7 +39,7 @@ class OrderSpec extends AnyWordSpec with Matchers {
         val order = new Order
         order.add("Cafe Latte")
         order.add("Cafe Latte")
-        order.view shouldEqual Map(
+        order.items shouldEqual Map(
           "Cafe Latte" -> 2
         )
       }

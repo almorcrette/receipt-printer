@@ -12,6 +12,6 @@ class Order extends OrderBase {
     _items
   }
 
-  def view: Map[String, Double] = _items
+  def items: Map[String, Double] = _items
 
 }

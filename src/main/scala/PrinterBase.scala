@@ -1,3 +1,3 @@
 trait PrinterBase {
-  def receipt: String
+  def print(order: OrderBase, till: Till): String
 }
