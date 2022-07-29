@@ -1,7 +1,6 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalamock.scalatest.MockFactory
-import org.scalamock.proxy.ProxyMockFactory
 
 class TillTest extends AnyWordSpec with Matchers with MockFactory {
   val coffeeConnectionCafe = new CafeDetails(
