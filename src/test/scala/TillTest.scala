@@ -47,7 +47,7 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
         thrown.getMessage should equal ("Not in menu")
       }
       "add an item to their order if in menu" in {
-        val mockOrder = mock[OrderBase]
+        val mockOrder = mock[Order]
         (mockOrder.add _).expects("Muffin Of The Day")
         val till = new Till(
           coffeeConnectionCafe,

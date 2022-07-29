@@ -1,12 +1,12 @@
 class Till(
             val cafeDetails: CafeDetails,
-            val _order: OrderBase = new Order,
-            val _receiptPrinter: PrinterBase = new ReceiptPrinter
+            val _order: Order = new Order,
+            val _receiptPrinter: ReceiptPrinter = new ReceiptPrinter
           ) {
 
   def header: List[String] = List(cafeDetails.shopName, cafeDetails.address, cafeDetails.phone)
 
-  def order: OrderBase = _order
+  def order: Order = _order
 
   def cafePrices: Map[String, Double] = {
     cafeDetails.prices

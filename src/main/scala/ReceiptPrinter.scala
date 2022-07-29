@@ -2,14 +2,14 @@ import com.github.nscala_time.time.Imports._
 
 class ReceiptPrinter(
                       val dateTimeFactory: FactoryBase[DateTime] = DateTimeFactory
-                    ) extends PrinterBase  {
-  def print(order: OrderBase, till: Till): String = {
+                    ) {
+  def print(order: Order, till: Till): String = {
     val List(name, address, phone) = till.header
     val total = _totalPrice(order, till)
     name + "\n" + address + "\n" + phone + "\n" + _receiptTime + "\n" + _orderList(order, till) + "\n" + _totalPriceFormat(total) + "\n" + _vatFormat(_vatOfTotal(total))
   }
 
-  def _orderList(order: OrderBase, till: Till): String = {
+  def _orderList(order: Order, till: Till): String = {
     val itemIterator = order.items.keysIterator
     val amountIterator = order.items.valuesIterator
     var list = ""
@@ -27,7 +27,7 @@ class ReceiptPrinter(
     dateTimeStamp.toString(formatter)
   }
 
-  def _totalPrice(order: OrderBase, till: Till): Double = {
+  def _totalPrice(order: Order, till: Till): Double = {
     val itemIterator = order.items.keysIterator
     val amountIterator = order.items.valuesIterator
     var total = 0.0

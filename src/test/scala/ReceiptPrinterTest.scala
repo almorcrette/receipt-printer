@@ -5,7 +5,7 @@ import com.github.nscala_time.time.Imports._
 
 class ReceiptPrinterTest extends AnyWordSpec with Matchers with MockFactory {
 
-  val mockOrder = mock[OrderBase]
+  val mockOrder = mock[Order]
   val mockTill = mock[Till]
 
   val mockHeader = List("The Coffee Connection", "123 Lakeside Way", "16503600708")
