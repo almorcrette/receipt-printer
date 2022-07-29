@@ -25,23 +25,9 @@ class OrderSpec extends AnyWordSpec with Matchers {
     )
   )
   "An Order" should {
-    "be created with a header" which {
-      "contains the name of the shop" in {
-        val order = new Order(coffeeConnectionCafe)
-        order.header("shopName") shouldEqual "The Coffee Connection"
-      }
-      "contains the address of the shop" in {
-        val order = new Order(coffeeConnectionCafe)
-        order.header("address") shouldEqual "123 Lakeside Way"
-      }
-      "contains the phone number of the shop" in {
-        val order = new Order(coffeeConnectionCafe)
-        order.header("phone") shouldEqual "16503600708"
-      }
-    }
     "be able to add items to it" which {
       "manages different menu items" in {
-        val order = new Order(coffeeConnectionCafe)
+        val order = new Order
         order.add("Cafe Latte")
         order.add("Cappuccino")
         order.view shouldEqual Map(
@@ -50,20 +36,12 @@ class OrderSpec extends AnyWordSpec with Matchers {
         )
       }
       "manages multiples of a single menu item" in {
-        val order = new Order(coffeeConnectionCafe)
+        val order = new Order
         order.add("Cafe Latte")
         order.add("Cafe Latte")
         order.view shouldEqual Map(
           "Cafe Latte" -> 2
         )
-      }
-      "throws error if item is not on the menu" in {
-        val order = new Order(coffeeConnectionCafe)
-
-        val thrown = the[Exception] thrownBy {
-          order.add("Babyccino")
-        }
-        thrown.getMessage should equal("Not in menu")
       }
     }
   }
