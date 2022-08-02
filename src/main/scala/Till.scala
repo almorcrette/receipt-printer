@@ -1,13 +1,16 @@
 class Till(
-            var cafeDetails: CafeDetails,
-            private val order: Order = new Order
+            val cafeDetails: CafeDetails,
+            private var order: List[Item] = List()
           ) {
 
-  def addItem(item: String): Unit = {
-    if (!(cafeDetails.prices contains item)) {
+  def addItem(name: String, number: Int): Unit = {
+    if (!(cafeDetails.prices contains name)) {
       throw new Exception("Not in menu")
+    } else if (!(order.exists(item => item.itemName == name))) {
+      order = new Item(name, number) :: order
+    } else {
+      order = new Item(name, order.filter(item => item.itemName == name)(0).quantity + number) :: order.filter(item => item.itemName != name)
     }
-    order.add(item)
   }
 
   def checkout(receiptPrinter: ReceiptPrinter): String = {

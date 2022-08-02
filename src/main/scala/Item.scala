@@ -1,0 +1,1 @@
+class Item(val itemName: String, val quantity: Int)
