@@ -3,20 +3,23 @@ import com.github.nscala_time.time.Imports._
 class ReceiptPrinter(
                       val dateTimeFactory: FactoryBase[DateTime] = DateTimeFactory
                     ) {
-  def print(order: Order, till: Till): String = {
-    val List(name, address, phone) = till.header
-    val total = _totalPrice(order, till)
-    name + "\n" + address + "\n" + phone + "\n" + _receiptTime + "\n" + _orderList(order, till) + "\n" + _totalPriceFormat(total) + "\n" + _vatFormat(_vatOfTotal(total))
+
+  def print(order: Order, cafeDetails: CafeDetails): String = {
+    val header = List(cafeDetails.shopName, cafeDetails.address, cafeDetails.phone)
+    val List(name, address, phone) = header
+    val total = _totalPrice(order, cafeDetails)
+    name + "\n" + address + "\n" + phone + "\n" + _receiptTime + "\n" + _orderList(order, cafeDetails) + "\n" + _totalPriceFormat(total) + "\n" + _vatFormat(_vatOfTotal(total))
   }
 
-  def _orderList(order: Order, till: Till): String = {
+  def _orderList(order: Order, cafeDetails: CafeDetails): String = {
     val itemIterator = order.items.keysIterator
     val amountIterator = order.items.valuesIterator
     var list = ""
+    val cafePrices = cafeDetails.prices
     while (itemIterator.hasNext) {
       val currentItem = itemIterator.next
       val currentItemAmount = amountIterator.next
-      list = list + f"\n$currentItemAmount x $currentItem         ${"%1.2f".format(till.cafePrices(currentItem) * currentItemAmount)}"
+      list = list + f"\n$currentItemAmount x $currentItem         ${"%1.2f".format(cafePrices(currentItem) * currentItemAmount)}"
     }
     list
   }
@@ -27,14 +30,15 @@ class ReceiptPrinter(
     dateTimeStamp.toString(formatter)
   }
 
-  def _totalPrice(order: Order, till: Till): Double = {
+  def _totalPrice(order: Order, cafeDetails: CafeDetails): Double = {
     val itemIterator = order.items.keysIterator
     val amountIterator = order.items.valuesIterator
     var total = 0.0
+    val cafePrices = cafeDetails.prices
     while (itemIterator.hasNext) {
       val currentItem = itemIterator.next
       val currentItemAmount: Int = amountIterator.next
-      total += till.cafePrices(currentItem) * currentItemAmount
+      total += cafePrices(currentItem) * currentItemAmount
     }
     total
   }

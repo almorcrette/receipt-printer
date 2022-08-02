@@ -27,21 +27,13 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
   )
 
   "A Till" should {
-    "show the menu" which {
-      "contains cafe menu items and prices" in {
-        val till = new Till(
-          coffeeConnectionCafe
-        )
-        till.cafePrices shouldEqual coffeeConnectionCafe.prices
-      }
-    }
     "allows user to update their order" which {
       "raises an error if their request item is not in the menu" in {
         val till = new Till(
           coffeeConnectionCafe
         )
         val thrown = the [Exception] thrownBy {
-          till.order_=("Babyccino")
+          till.addItem("Babyccino")
         }
         thrown.getMessage should equal ("Not in menu")
       }
@@ -52,7 +44,7 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
           coffeeConnectionCafe,
           mockOrder
         )
-        till.order_=("Muffin Of The Day")
+        till.addItem("Muffin Of The Day")
       }
 
     }
@@ -62,12 +54,10 @@ class TillTest extends AnyWordSpec with Matchers with MockFactory {
         val mockOrder = mock[Order]
         val till = new Till(
           coffeeConnectionCafe,
-          mockOrder,
-          mockReceiptPrinter
-        )
-        (mockReceiptPrinter.print _).expects(mockOrder, till).returning("a receipt")
+          mockOrder)
+        (mockReceiptPrinter.print _).expects(mockOrder, coffeeConnectionCafe).returning("a receipt")
 
-        till.checkout should equal ("a receipt")
+        till.checkout(mockReceiptPrinter) should equal ("a receipt")
       }
     }
   }
